@@ -51,7 +51,7 @@ func _process(delta):
 			fps_buffer_idx = 0
 		
 		# Calcuate the frame rate from the buffer.
-		var sum: int = 0
+		var sum: float = 0
 		highest = 0
 		lowest = INF
 		
@@ -66,4 +66,4 @@ func _process(delta):
 		#warning-ignore:integer_division
 		average = sum / frame_range
 		
-		$Label.text = "Minimum: %s\nMaximum: %s\nAverage: %s" % [str(lowest), str(highest), str(average)]
+		$Digits.text = "%3.1f\n%3.1f\n%3.1f" % [lowest, highest, average]
