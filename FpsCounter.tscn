@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/fps_counter/Counter.gd" type="Script" id=1]
+[ext_resource path="res://addons/fps_counter/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 37
+font_data = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 128
+
+[node name="Counter" type="ColorRect" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -271.0
+margin_bottom = 175.0
+color = Color( 0.603922, 0.603922, 0.603922, 0.45098 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Counter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "Minimum: 0
+Maximum: 999
+Average: 60"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
