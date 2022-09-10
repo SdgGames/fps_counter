@@ -1,69 +1,71 @@
-extends ColorRect
+extends Control
 
-export var enabled: bool setget set_enabled, get_enabled
-export var frame_range = 120
-export var average = 0
-export var highest = 0
-export var lowest = 0
+# Seconds of frame data to track.
+var average_timespan := 10
 
-var fps_buffer: Array
-var fps_buffer_idx: int
+# Cumulative Stats over multiple seconds.
+var latest := 0
+var cum_highest := 0
+var cum_lowest := INF
+var cum_average := 0
 
+# Stats within a single second.
+var frames := 0
+var highest := 0
+var lowest := INF
 
-# Register the FPS counter with a console if the console exists.
-func _ready():
-	if $"/root".has_node("Console"):
-		Console.add_command("fps", self, 'toggle_enabled')\
-				.set_description("Enables or disables the FPS counter.")\
-				.register()
+var enabled := true
+var stats := []
 
-
-func toggle_enabled():
-	set_enabled(!enabled)
-
-func set_enabled(value: bool):
-	visible = value
-	enabled = value
-
-func get_enabled():
-	return visible
+onready var label = $Label
 
 
-func initialize_buffer():
-	fps_buffer.resize(frame_range)
-	fps_buffer_idx = 0
-	for frame in frame_range:
-		fps_buffer[frame] = 60
-
-
-func _process(delta):
+func _process(_delta):
 	if enabled:
-		if fps_buffer.size() != frame_range:
-			initialize_buffer()
+		# Measure frames per second directly every second.
+		frames += 1
 		
 		# Update the buffer.
-		var fps = 1 / delta
-		if fps > 0 and fps < 2000: # Sanity check, things get weird when a window resizes
-			fps_buffer[fps_buffer_idx] = fps
-		
-		fps_buffer_idx += 1
-		if fps_buffer_idx >= frame_range:
-			fps_buffer_idx = 0
-		
-		# Calcuate the frame rate from the buffer.
-		var sum: float = 0
-		highest = 0
-		lowest = INF
-		
-		for frame in frame_range:
-			fps = fps_buffer[frame]
-			sum += fps
-			if fps > highest:
-				highest = fps
+		var fps = Engine.get_frames_per_second()
+		if fps > 0 and fps < 999:
 			if fps < lowest:
 				lowest = fps
-			
-		#warning-ignore:integer_division
-		average = sum / frame_range
-		
-		$Digits.text = "%3.1f\n%3.1f\n%3.1f" % [lowest, highest, average]
+			if fps > highest:
+				highest = fps
+
+
+func _update_stats():
+	latest = frames
+	stats.push_back(Vector3(lowest, latest, highest))
+	if stats.size() > average_timespan:
+		var _d = stats.pop_front()
+	
+	var total := 0
+	cum_lowest = INF
+	cum_highest = 0
+	
+	for i in stats:
+		if i.x < cum_lowest:
+			cum_lowest = i.x
+		total += i.y
+		if i.z > cum_highest:
+			cum_highest = i.z
+	cum_average = total / stats.size()
+	
+	frames = 0
+	highest = 0
+	lowest = INF
+
+
+func _update_label():
+	label.text = \
+		"\n Cur. FPS: %3.0f " % latest + \
+		"\n  Minimum: %3.0f " % cum_lowest + \
+		"\n  Maximum: %3.0f " % cum_highest + \
+		"\n  Average: %3.0f \n" % cum_average
+
+
+func _on_Timer_timeout():
+	if frames > 0:
+		_update_stats()
+		_update_label()

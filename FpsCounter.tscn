@@ -1,50 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://addons/fps_counter/Counter.gd" type="Script" id=1]
-[ext_resource path="res://addons/fps_counter/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-size = 37
-font_data = ExtResource( 2 )
+[ext_resource path="res://addons/fps_counter/Counter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/fps_counter/FpsCounter.gd" type="Script" id=2]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 128
+script = ExtResource( 2 )
 
-[node name="Counter" type="ColorRect" parent="."]
-visible = false
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -304.0
-margin_bottom = 176.0
-mouse_filter = 2
-color = Color( 0.603922, 0.603922, 0.603922, 0.45098 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Counter"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
-text = "Minimum:
-Maximum:
-Average:"
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Digits" type="Label" parent="Counter"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -16.0
-custom_fonts/font = SubResource( 1 )
-text = "0
-999
-60"
-align = 2
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
+[node name="Counter" parent="." instance=ExtResource( 1 )]
+margin_left = -1584.0
