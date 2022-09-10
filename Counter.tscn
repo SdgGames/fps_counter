@@ -15,13 +15,13 @@ script = ExtResource( 2 )
 [node name="Label" type="Label" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -168.0
+margin_left = -180.0
 margin_bottom = 123.0
 theme = ExtResource( 1 )
 text = "
  Cur. FPS: 10
   Minimum: 1
-  Maximum: 100
+  Maximum: 100 
   Average: 60
 "
 
