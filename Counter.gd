@@ -50,7 +50,7 @@ func _update_stats():
 		total += i.y
 		if i.z > cum_highest:
 			cum_highest = i.z
-	cum_average = total / stats.size()
+	cum_average = min(cum_highest, total / stats.size())
 	
 	frames = 0
 	highest = 0
