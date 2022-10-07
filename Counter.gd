@@ -17,7 +17,7 @@ var lowest := INF
 var enabled := true
 var stats := []
 
-onready var label = $Label
+@onready var label = $Label
 
 
 func _process(_delta):
