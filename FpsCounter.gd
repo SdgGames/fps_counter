@@ -20,4 +20,4 @@ func _ready():
 
 
 func toggle_enabled():
-	enabled != enabled
+	enabled = !enabled
