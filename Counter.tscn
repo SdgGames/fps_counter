@@ -1,23 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://c3hsxgmqwip4g"]
 
-[ext_resource path="res://addons/fps_counter/Menu_Theme.tres" type="Theme" id=1]
-[ext_resource path="res://addons/fps_counter/Counter.gd" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://c4hslr8ga2ory" path="res://addons/fps_counter/Menu_Theme.tres" id="1"]
+[ext_resource type="Script" path="res://addons/fps_counter/Counter.gd" id="2"]
 
 [node name="Counter" type="Control"]
+layout_mode = 3
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -1600.0
 offset_bottom = 900.0
 mouse_filter = 2
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -180.0
 offset_bottom = 123.0
-theme = ExtResource( 1 )
+theme = ExtResource("1")
 text = "
  Cur. FPS: 10
   Minimum: 1
