@@ -9,4 +9,3 @@ script = ExtResource("2")
 
 [node name="Counter" parent="." instance=ExtResource("1")]
 offset_left = -1584.0
-grow_horizontal = 0
