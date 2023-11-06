@@ -17,7 +17,7 @@ var lowest := INF
 var enabled := true
 var stats := []
 
-@onready var label = $Label
+@onready var label = $MarginContainer/Label
 
 
 func _process(_delta):
@@ -59,10 +59,10 @@ func _update_stats():
 
 func _update_label():
 	label.text = \
-		"\n Cur. FPS: %3.0f " % latest + \
-		"\n  Minimum: %3.0f " % cum_lowest + \
-		"\n  Maximum: %3.0f " % cum_highest + \
-		"\n  Average: %3.0f \n" % cum_average
+		"Cur. FPS: %3.0f" % latest + \
+		"\nMinimum: %3.0f" % cum_lowest + \
+		"\nMaximum: %3.0f" % cum_highest + \
+		"\nAverage: %3.0f" % cum_average
 
 
 func _on_Timer_timeout():

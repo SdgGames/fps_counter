@@ -1,14 +1,15 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c4hslr8ga2ory"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c4hslr8ga2ory"]
 
-[ext_resource type="FontFile" uid="uid://clbyyki2ipi2u" path="res://addons/fps_counter/courier.ttf" id="1_sje73"]
-
-[sub_resource type="StyleBoxFlat" id="1"]
-bg_color = Color(1, 1, 1, 0.254902)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ebg3m"]
+bg_color = Color(0.776471, 0.776471, 0.776471, 0.870588)
 
 [resource]
-default_font = ExtResource("1_sje73")
 Label/colors/font_color = Color(0, 0, 0, 1)
-Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 3
-Label/font_sizes/font_size = 20
-Label/styles/normal = SubResource("1")
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/constants/outline_size = 2
+Label/font_sizes/font_size = 24
+Label/styles/normal = SubResource("StyleBoxFlat_ebg3m")
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 16
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 16
